@@ -10,14 +10,21 @@ public class StringChanges {
         }
     }
 
-    public String reverse(String typeToDisplay) {
+    public void reverse() {
         for (int i = 0; i < stringForReverse.size() / 2; i++) {
-            typeToDisplay = stringForReverse.get(i);
+            String forChange = stringForReverse.get(i);
             stringForReverse.set(i, stringForReverse.get(stringForReverse.size() - i - 1));
-            stringForReverse.set(stringForReverse.size() - i - 1, typeToDisplay);
+            stringForReverse.set(stringForReverse.size() - i - 1, forChange);
         }
-        return typeToDisplay;
+
     }
 
-
+    @Override
+    public String toString() {
+        String display = "";
+        for (int i = 0; i < stringForReverse.size(); i++) {
+            display = display + stringForReverse.get(i);
+        }
+        return display;
+    }
 }
