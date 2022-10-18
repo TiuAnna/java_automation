@@ -1,3 +1,5 @@
+package pk.sandbox;
+
 import java.util.ArrayList;
 
 public class StringChanges {
