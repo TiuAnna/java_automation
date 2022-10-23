@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="pk.addressbook.Test1Test" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-23T04:36:06" hostname="DESKTOP-A05NKIP" time="16.702">
+  <properties/>
+  <testcase name="test1" classname="pk.addressbook.Test1Test" time="16.702"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+1666499768064	geckodriver	INFO	Listening on 127.0.0.1:58972
+1666499768507	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49491" "--remote-allow-hosts" "localhost" "--remote-allow-origins" "http://127.0.0.1:49491/,http://localhost:49491/,http://[::1]:49491/" "-no-remote" "-profile" "C:\\Users\\TIULKA~1\\AppData\\Local\\Temp\\rust_mozprofilefOmAir"
+1666499771209	Marionette	INFO	Marionette enabled
+1666499771271	Marionette	INFO	Listening on port 64691
+WebDriver BiDi listening on ws://localhost:49491
+Read port: 64691
+1666499772018	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\TIULKA~1\\AppData\\Local\\Temp\\rust_mozprofilefOmAir\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49491/devtools/browser/1ff2a6d8-b50e-4a68-913e-abcdef4489c7
+Oct 23, 2022 7:36:15 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected upstream dialect: W3C
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://localhost"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://localhost"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://localhost"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://localhost"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://localhost"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://localhost"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://localhost"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1666499779629	Marionette	INFO	Stopped listening on port 64691
+!!! error running onStopped callback: TypeError: callback is not a function
+]]></system-err>
+</testsuite>
