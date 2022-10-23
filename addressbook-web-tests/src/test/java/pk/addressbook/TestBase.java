@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class TestBase {
     JavascriptExecutor js;
-    private WebDriver driver;
+    protected WebDriver driver;
     private Map<String, Object> vars;
 
     @Before
@@ -57,5 +57,25 @@ public class TestBase {
 
     protected void goToGroupPage() {
       driver.findElement(By.linkText("groups")).click();
+    }
+
+    protected void submitNewContactCreation() {
+      driver.findElement(By.name("theform")).click();
+      driver.findElement(By.cssSelector("input:nth-child(87)")).click();
+    }
+
+    protected void fillTheContactForm(ContactData contactData) {
+      driver.findElement(By.name("firstname")).click();
+      driver.findElement(By.name("firstname")).sendKeys(contactData.name());
+      driver.findElement(By.name("lastname")).click();
+      driver.findElement(By.name("lastname")).sendKeys(contactData.lastName());
+      driver.findElement(By.name("home")).click();
+      driver.findElement(By.name("home")).sendKeys(contactData.telNumber());
+      driver.findElement(By.name("email")).click();
+      driver.findElement(By.name("email")).sendKeys(contactData.mail());
+    }
+
+    protected void goToNewContactCreationPage() {
+      driver.findElement(By.linkText("add new")).click();
     }
 }
