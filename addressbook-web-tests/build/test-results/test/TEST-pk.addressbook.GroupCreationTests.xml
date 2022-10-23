@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="pk.addressbook.Test1Test" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-23T04:36:06" hostname="DESKTOP-A05NKIP" time="16.702">
+<testsuite name="pk.addressbook.GroupCreationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-23T05:29:36" hostname="DESKTOP-A05NKIP" time="12.231">
   <properties/>
-  <testcase name="test1" classname="pk.addressbook.Test1Test" time="16.702"/>
+  <testcase name="testGroupCreation" classname="pk.addressbook.GroupCreationTests" time="12.231"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
-1666499768064	geckodriver	INFO	Listening on 127.0.0.1:58972
-1666499768507	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49491" "--remote-allow-hosts" "localhost" "--remote-allow-origins" "http://127.0.0.1:49491/,http://localhost:49491/,http://[::1]:49491/" "-no-remote" "-profile" "C:\\Users\\TIULKA~1\\AppData\\Local\\Temp\\rust_mozprofilefOmAir"
-1666499771209	Marionette	INFO	Marionette enabled
-1666499771271	Marionette	INFO	Listening on port 64691
-WebDriver BiDi listening on ws://localhost:49491
-Read port: 64691
-1666499772018	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
-console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\TIULKA~1\\AppData\\Local\\Temp\\rust_mozprofilefOmAir\\search.json.mozlz4", (void 0)))
-DevTools listening on ws://localhost:49491/devtools/browser/1ff2a6d8-b50e-4a68-913e-abcdef4489c7
-Oct 23, 2022 7:36:15 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+1666502976921	geckodriver	INFO	Listening on 127.0.0.1:61382
+1666502977294	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51590" "--remote-allow-hosts" "localhost" "--remote-allow-origins" "http://127.0.0.1:51590/,http://localhost:51590/,http://[::1]:51590/" "-no-remote" "-profile" "C:\\Users\\TIULKA~1\\AppData\\Local\\Temp\\rust_mozprofileOvPzfW"
+1666502978156	Marionette	INFO	Marionette enabled
+1666502978163	Marionette	INFO	Listening on port 50154
+WebDriver BiDi listening on ws://localhost:51590
+Read port: 50154
+1666502978837	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\TIULKA~1\\AppData\\Local\\Temp\\rust_mozprofileOvPzfW\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51590/devtools/browser/22b44f62-a0df-46f6-bec6-3e1427d5057c
+Oct 23, 2022 8:29:42 AM org.openqa.selenium.remote.ProtocolHandshake createSession
 INFO: Detected upstream dialect: W3C
 console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://localhost"
 console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://localhost"
@@ -30,7 +30,8 @@ console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message f
 JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
 console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://localhost"
 JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
-1666499779629	Marionette	INFO	Stopped listening on port 64691
+1666502986188	Marionette	INFO	Stopped listening on port 50154
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
 !!! error running onStopped callback: TypeError: callback is not a function
 ]]></system-err>
 </testsuite>

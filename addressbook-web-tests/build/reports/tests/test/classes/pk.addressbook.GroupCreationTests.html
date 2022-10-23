@@ -3,17 +3,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta http-equiv="x-ua-compatible" content="IE=edge"/>
-<title>Test results - Class pk.addressbook.Test1Test</title>
+<title>Test results - Class pk.addressbook.GroupCreationTests</title>
 <link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
 <link href="../css/style.css" rel="stylesheet" type="text/css"/>
 <script src="../js/report.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="content">
-<h1>Class pk.addressbook.Test1Test</h1>
+<h1>Class pk.addressbook.GroupCreationTests</h1>
 <div class="breadcrumbs">
 <a href="../index.html">all</a> &gt; 
-<a href="../packages/pk.addressbook.html">pk.addressbook</a> &gt; Test1Test</div>
+<a href="../packages/pk.addressbook.html">pk.addressbook</a> &gt; GroupCreationTests</div>
 <div id="summary">
 <table>
 <tr>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">16.702s</div>
+<div class="counter">12.231s</div>
 <p>duration</p>
 </div>
 </td>
@@ -78,8 +78,8 @@
 </tr>
 </thead>
 <tr>
-<td class="success">test1</td>
-<td class="success">16.702s</td>
+<td class="success">testGroupCreation</td>
+<td class="success">12.231s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -90,16 +90,16 @@
 <pre>SLF4J: Failed to load class &quot;org.slf4j.impl.StaticLoggerBinder&quot;.
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
-1666499768064	geckodriver	INFO	Listening on 127.0.0.1:58972
-1666499768507	mozrunner::runner	INFO	Running command: &quot;C:\\Program Files\\Mozilla Firefox\\firefox.exe&quot; &quot;--marionette&quot; &quot;--remote-debugging-port&quot; &quot;49491&quot; &quot;--remote-allow-hosts&quot; &quot;localhost&quot; &quot;--remote-allow-origins&quot; &quot;http://127.0.0.1:49491/,http://localhost:49491/,http://[::1]:49491/&quot; &quot;-no-remote&quot; &quot;-profile&quot; &quot;C:\\Users\\TIULKA~1\\AppData\\Local\\Temp\\rust_mozprofilefOmAir&quot;
-1666499771209	Marionette	INFO	Marionette enabled
-1666499771271	Marionette	INFO	Listening on port 64691
-WebDriver BiDi listening on ws://localhost:49491
-Read port: 64691
-1666499772018	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
-console.warn: SearchSettings: &quot;get: No settings file exists, new profile?&quot; (new NotFoundError(&quot;Could not open the file at C:\\Users\\TIULKA~1\\AppData\\Local\\Temp\\rust_mozprofilefOmAir\\search.json.mozlz4&quot;, (void 0)))
-DevTools listening on ws://localhost:49491/devtools/browser/1ff2a6d8-b50e-4a68-913e-abcdef4489c7
-Oct 23, 2022 7:36:15 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+1666502976921	geckodriver	INFO	Listening on 127.0.0.1:61382
+1666502977294	mozrunner::runner	INFO	Running command: &quot;C:\\Program Files\\Mozilla Firefox\\firefox.exe&quot; &quot;--marionette&quot; &quot;--remote-debugging-port&quot; &quot;51590&quot; &quot;--remote-allow-hosts&quot; &quot;localhost&quot; &quot;--remote-allow-origins&quot; &quot;http://127.0.0.1:51590/,http://localhost:51590/,http://[::1]:51590/&quot; &quot;-no-remote&quot; &quot;-profile&quot; &quot;C:\\Users\\TIULKA~1\\AppData\\Local\\Temp\\rust_mozprofileOvPzfW&quot;
+1666502978156	Marionette	INFO	Marionette enabled
+1666502978163	Marionette	INFO	Listening on port 50154
+WebDriver BiDi listening on ws://localhost:51590
+Read port: 50154
+1666502978837	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: &quot;get: No settings file exists, new profile?&quot; (new NotFoundError(&quot;Could not open the file at C:\\Users\\TIULKA~1\\AppData\\Local\\Temp\\rust_mozprofileOvPzfW\\search.json.mozlz4&quot;, (void 0)))
+DevTools listening on ws://localhost:51590/devtools/browser/22b44f62-a0df-46f6-bec6-3e1427d5057c
+Oct 23, 2022 8:29:42 AM org.openqa.selenium.remote.ProtocolHandshake createSession
 INFO: Detected upstream dialect: W3C
 console.warn: LoginRecipes: &quot;getRecipes: falling back to a synchronous message for:&quot; &quot;http://localhost&quot;
 console.warn: LoginRecipes: &quot;getRecipes: falling back to a synchronous message for:&quot; &quot;http://localhost&quot;
@@ -114,7 +114,8 @@ console.warn: LoginRecipes: &quot;getRecipes: falling back to a synchronous mess
 JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
 console.warn: LoginRecipes: &quot;getRecipes: falling back to a synchronous message for:&quot; &quot;http://localhost&quot;
 JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
-1666499779629	Marionette	INFO	Stopped listening on port 64691
+1666502986188	Marionette	INFO	Stopped listening on port 50154
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
 !!! error running onStopped callback: TypeError: callback is not a function
 </pre>
 </span>
@@ -127,7 +128,7 @@ JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeE
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.4</a> at Oct 23, 2022, 7:36:24 AM</p>
+<a href="http://www.gradle.org">Gradle 7.4</a> at Oct 23, 2022, 8:29:48 AM</p>
 </div>
 </div>
 </body>
