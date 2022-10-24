@@ -18,8 +18,10 @@ public class ContactHelper extends HelperBase {
     public void fillTheContactForm(ContactData contactData) {
         type(By.name("firstname"),contactData.name());
         type(By.name("lastname"),contactData.lastName());
+        type(By.name("address"),contactData.address());
         type(By.name("home"),contactData.telNumber());
         type(By.name("email"),contactData.mail());
+
     }
 
     public void selectContact() {
@@ -32,5 +34,9 @@ public class ContactHelper extends HelperBase {
     public void acceptAlert() {
         assertThat(driver.switchTo().alert().getText(), is("Delete 1 addresses?"));
         driver.switchTo().alert().accept();
+    }
+
+    public void submitContactModification() {
+        click(By.cssSelector("input:nth-child(86)"));
     }
 }

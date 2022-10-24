@@ -23,4 +23,12 @@ public class NavigationHelper extends HelperBase {
     public void goToHomePage() {
         click(By.linkText("home"));
     }
+
+    public void goToEditPage() {
+        click(By.cssSelector(".center:nth-child(8) img"));
+    }
+
+    public void returnToContactPage() {
+        click(By.linkText("home page"));
+    }
 }
