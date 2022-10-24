@@ -1,4 +1,4 @@
-package pk.addressbook;
+package pk.addressbook.model;
 
 import java.util.Objects;
 
