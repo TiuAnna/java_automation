@@ -4,9 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pk.addressbook.model.ContactData;
 
-public class ContactHelper extends HelperBase {
-    public WebDriver driver;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
+public class ContactHelper extends HelperBase {
     public ContactHelper(WebDriver driver) {
 
         super(driver);
@@ -19,5 +20,17 @@ public class ContactHelper extends HelperBase {
         type(By.name("lastname"),contactData.lastName());
         type(By.name("home"),contactData.telNumber());
         type(By.name("email"),contactData.mail());
+    }
+
+    public void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    public void deleteSelectedContacts() {
+        click(By.cssSelector(".left:nth-child(8) > input"));
+    }
+    public void acceptAlert() {
+        assertThat(driver.switchTo().alert().getText(), is("Delete 1 addresses?"));
+        driver.switchTo().alert().accept();
     }
 }
