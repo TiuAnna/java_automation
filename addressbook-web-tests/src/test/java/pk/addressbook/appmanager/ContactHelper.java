@@ -29,7 +29,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void deleteSelectedContacts() {
-        click(By.name("delete"));
+        click(By.xpath("//input[@value='Delete']"));
     }
     public void acceptAlert() {
         assertThat(driver.switchTo().alert().getText(), is("Delete 1 addresses?"));
