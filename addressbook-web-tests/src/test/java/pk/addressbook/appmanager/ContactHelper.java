@@ -13,7 +13,7 @@ public class ContactHelper extends HelperBase {
         super(driver);
     }
     public void submitNewContactCreation() {
-        click(By.cssSelector("input:nth-child(87)"));
+        click(By.name("submit"));
     }
     public void fillTheContactForm(ContactData contactData) {
         type(By.name("firstname"),contactData.name());
@@ -29,7 +29,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void deleteSelectedContacts() {
-        click(By.cssSelector(".left:nth-child(8) > input"));
+        click(By.name("delete"));
     }
     public void acceptAlert() {
         assertThat(driver.switchTo().alert().getText(), is("Delete 1 addresses?"));
@@ -37,6 +37,6 @@ public class ContactHelper extends HelperBase {
     }
 
     public void submitContactModification() {
-        click(By.cssSelector("input:nth-child(86)"));
+        click(By.name("update"));
     }
 }
