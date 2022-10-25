@@ -37,6 +37,6 @@ public class ContactHelper extends HelperBase {
     }
 
     public void submitContactModification() {
-        click(By.cssSelector("input:nth-child(86)"));
+        click(By.name("submit"));
     }
 }
