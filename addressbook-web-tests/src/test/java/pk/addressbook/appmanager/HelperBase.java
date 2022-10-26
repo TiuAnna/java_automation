@@ -3,6 +3,9 @@ package pk.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 public class HelperBase {
     protected WebDriver driver;
 
@@ -23,5 +26,9 @@ public class HelperBase {
             driver.findElement(locator).sendKeys(text);
             }
         }
+    }
+    public void acceptAlert(String alertText) {
+        assertThat(driver.switchTo().alert().getText(), is(alertText));
+        driver.switchTo().alert().accept();
     }
 }
