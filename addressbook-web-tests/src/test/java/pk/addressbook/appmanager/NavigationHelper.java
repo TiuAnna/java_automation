@@ -17,13 +17,8 @@ public class NavigationHelper extends HelperBase {
         }
       click(By.linkText("groups"));
     }
-    public void returnToGroupPage() {
-        click(By.linkText("group page"));
-    }
 
-    public void goToNewContactCreationPage() {
-      click(By.linkText("add new"));
-    }
+
 
     public void goToHomePage() {
         if (isElementPresent(By.id("maintable"))) {
@@ -36,7 +31,5 @@ public class NavigationHelper extends HelperBase {
         click(By.cssSelector(".center:nth-child(8) img"));
     }
 
-    public void returnToContactPage() {
-        click(By.linkText("home page"));
-    }
+
 }
