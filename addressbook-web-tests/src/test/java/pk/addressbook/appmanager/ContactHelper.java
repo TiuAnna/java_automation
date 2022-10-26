@@ -10,6 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class ContactHelper extends HelperBase {
+
     public ContactHelper(WebDriver driver) {
 
         super(driver);
@@ -64,5 +65,13 @@ public class ContactHelper extends HelperBase {
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
+    }
+    public String getGroupName() {
+        String group;
+       if (isElementPresent(By.xpath("//option[text()='new group']"))) {
+           return "new group";
+       } else {
+           return null;
+       }
     }
 }

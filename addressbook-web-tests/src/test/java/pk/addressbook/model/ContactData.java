@@ -2,7 +2,7 @@ package pk.addressbook.model;
 
 import java.util.Objects;
 
-public record ContactData(String name, String lastName, String address, String telNumber, String mail, String group) {
+public record ContactData (String name, String lastName, String address, String telNumber, String mail, String group) {
 
     @Override
     public boolean equals(Object obj) {
