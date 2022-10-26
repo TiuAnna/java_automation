@@ -1,6 +1,7 @@
 package pk.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -30,5 +31,14 @@ public class HelperBase {
     public void acceptAlert(String alertText) {
         assertThat(driver.switchTo().alert().getText(), is(alertText));
         driver.switchTo().alert().accept();
+    }
+
+    protected boolean isElementPresent(By locator) {
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
     }
 }
