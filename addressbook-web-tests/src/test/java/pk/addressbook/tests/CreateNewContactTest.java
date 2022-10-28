@@ -3,11 +3,10 @@ import org.junit.Test;
 import pk.addressbook.model.ContactData;
 
 public class CreateNewContactTest extends TestBase{
-  
   @Test
   public void createNewContact() {
     app.getContactHelper().createContact(new ContactData("Nick", "Yellow",
-            "LA", null, "thesecond@mail.com", "new group"), true);
+            "LA", null, "thesecond@mail.com", app.getContactHelper().getGroupName()), true);
   }
 
 }

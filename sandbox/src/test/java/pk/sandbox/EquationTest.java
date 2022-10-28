@@ -5,12 +5,12 @@ import org.testng.annotations.Test;
 
 public class EquationTest {
     @Test
-    public void test0() {
+    public void testNoSolutions() {
         Equation e = new Equation(1,1,1);
         Assert.assertEquals(e.getN(),0);
     }
     @Test
-    public void test1() {
+    public void testOneSolution() {
         Equation e = new Equation(1,2,1);
         Assert.assertEquals(e.getN(),1);
     }

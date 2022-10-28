@@ -67,7 +67,6 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
     public String getGroupName() {
-        String group;
        if (isElementPresent(By.xpath("//option[text()='new group']"))) {
            return "new group";
        } else {
