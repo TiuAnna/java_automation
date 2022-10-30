@@ -12,7 +12,11 @@ public class GroupModificationTests extends TestBase {
         if (! app.getGroupHelper().isThereAGroup()) {
             app.getGroupHelper().createGroup(new GroupData("new group", "new header", "new footer"));
         }
-        app.getGroupHelper().selectGroup();
+        if (before == 0) {
+            app.getGroupHelper().selectGroup(before);
+        } else {
+            app.getGroupHelper().selectGroup(before - 1);
+        }
         app.getGroupHelper().initGroupModification();
         app.getGroupHelper().fillGroupForm(new GroupData("modified group", "new header", "modified footer"));
         app.getGroupHelper().submitGroupModification();
