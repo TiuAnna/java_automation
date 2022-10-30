@@ -25,11 +25,11 @@ public class ApplicationManager {
     }
 
     public void init() {
-        if (browser == Browser.FIREFOX) {
+        if (browser.equals(Browser.FIREFOX)) {
         driver = new FirefoxDriver();
-        } else if (browser == Browser.CHROME ) {
+        } else if (browser.equals(Browser.CHROME)) {
             driver = new ChromeDriver();
-        } else if (browser == Browser.EDGE) {
+        } else if (browser.equals(Browser.EDGE)) {
             driver = new EdgeDriver();
         }
         js = (JavascriptExecutor) driver;
