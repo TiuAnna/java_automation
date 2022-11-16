@@ -3,6 +3,8 @@ import org.junit.Test;
 import org.testng.Assert;
 import pk.addressbook.model.GroupData;
 
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 public class GroupCreationTests extends TestBase {
@@ -11,9 +13,14 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation() {
     app.getNavigationHelper().goToGroupPage();
     List<GroupData> before = app.getGroupHelper().getGroupList();
-    app.getGroupHelper().createGroup(new GroupData("new group", "new header", "new footer"));
+    GroupData group = new GroupData("new group", "new header", "new footer");
+    app.getGroupHelper().createGroup(group);
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size() + 1);
+
+    group.setId(after.stream().max((Comparator.comparingInt(GroupData::id))).get().id());
+    before.add(group);
+    Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
 
   }
 
