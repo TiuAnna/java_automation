@@ -31,6 +31,7 @@ public final class ContactData {
         this.group = group;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,6 +54,12 @@ public final class ContactData {
                 '}';
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    public int id() {
+        return id;
+    }
     public String name() {
         return name;
     }
