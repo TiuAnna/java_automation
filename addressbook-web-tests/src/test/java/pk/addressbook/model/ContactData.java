@@ -2,30 +2,80 @@ package pk.addressbook.model;
 
 import java.util.Objects;
 
-public record ContactData (String name, String lastName, String address, String telNumber, String mail, String group) {
+public final class ContactData {
+    private int id;
+    private final String name;
+    private final String lastName;
+    private final String address;
+    private final String telNumber;
+    private final String mail;
+    private final String group;
+
+    public ContactData(String name, String lastName, String address, String telNumber, String mail, String group) {
+        this.id = 0;
+        this.name = name;
+        this.lastName = lastName;
+        this.address = address;
+        this.telNumber = telNumber;
+        this.mail = mail;
+        this.group = group;
+    }
+
+    public ContactData(int id, String name, String lastName, String address, String telNumber, String mail, String group) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.address = address;
+        this.telNumber = telNumber;
+        this.mail = mail;
+        this.group = group;
+    }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (ContactData) obj;
-        return Objects.equals(this.name, that.name) &&
-                Objects.equals(this.lastName, that.lastName) &&
-                Objects.equals(this.address, that.address) &&
-                Objects.equals(this.telNumber, that.telNumber) &&
-                Objects.equals(this.mail, that.mail) &&
-                Objects.equals(this.group, that.group);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return id == that.id && Objects.equals(name, that.name) && Objects.equals(lastName, that.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, lastName);
     }
 
     @Override
     public String toString() {
-        return "ContactData[" +
-                "name=" + name + ", " +
-                "lastName=" + lastName + ", " +
-                "address=" + address + ", " +
-                "telNumber=" + telNumber + ", " +
-                "mail=" + mail + ", " +
-                "group=" + group + ']';
+        return "ContactData{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
+
+    public String name() {
+        return name;
+    }
+
+    public String lastName() {
+        return lastName;
+    }
+
+    public String address() {
+        return address;
+    }
+
+    public String telNumber() {
+        return telNumber;
+    }
+
+    public String mail() {
+        return mail;
+    }
+
+    public String group() {
+        return group;
+    }
+
 
 }

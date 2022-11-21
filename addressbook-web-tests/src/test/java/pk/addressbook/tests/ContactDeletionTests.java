@@ -1,8 +1,10 @@
 package pk.addressbook.tests;
 
 import org.junit.Test;
+import org.testng.Assert;
 import pk.addressbook.model.ContactData;
-import pk.addressbook.model.GroupData;
+
+import java.util.ArrayList;
 
 public class ContactDeletionTests extends TestBase{
     @Test
@@ -11,9 +13,12 @@ public class ContactDeletionTests extends TestBase{
         if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("Nick", "Yellow", "LA",null, "thesecond@mail.com", app.getContactHelper().getGroupName()), true);
         }
-        app.getContactHelper().selectContact();
+        ArrayList<ContactData> before = app.getContactHelper().getContactList();
+        app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().deleteSelectedContacts();
         app.getContactHelper().acceptAlertForDeletion();
         app.getNavigationHelper().goToHomePage();
+        ArrayList<ContactData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size() - 1);
     }
 }
