@@ -29,7 +29,6 @@ public class NavigationHelper extends HelperBase {
 
     public void goToEditPage(int index) {
         driver.findElements(By.xpath("//img[@title='Edit']")).get(index).click();
-//        click(By.cssSelector(".center:nth-child(8) img"));
     }
 
 
