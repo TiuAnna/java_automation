@@ -3,8 +3,13 @@ package pk.addressbook.appmanager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import pk.addressbook.model.ContactData;
+import pk.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -34,8 +39,8 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void selectContact() {
-        click(By.name("selected[]"));
+    public void selectContact(int index) {
+        driver.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void deleteSelectedContacts() {
@@ -67,11 +72,24 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
     public String getGroupName() {
-        String group;
        if (isElementPresent(By.xpath("//option[text()='new group']"))) {
            return "new group";
        } else {
            return null;
        }
+    }
+
+    public ArrayList<ContactData> getContactList() {
+        ArrayList<ContactData> contacts = new ArrayList<>();
+        List<WebElement> elements = driver.findElements(By.name("entry"));
+        for (WebElement element : elements) {
+            List<WebElement> fields = element.findElements(By.tagName("td"));
+            String lastName = fields.get(1).getText();
+            String name = fields.get(2).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData contact = new ContactData(id, name, lastName, null, null, null, null);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
