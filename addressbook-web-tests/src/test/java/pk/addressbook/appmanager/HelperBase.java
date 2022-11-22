@@ -3,9 +3,8 @@ package pk.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 public class HelperBase {
     protected WebDriver driver;
@@ -29,7 +28,8 @@ public class HelperBase {
         }
     }
     public void acceptAlert(String alertText) {
-        assertThat(driver.switchTo().alert().getText(), is(alertText));
+        String displayedAlertText = driver.switchTo().alert().getText();
+        Assert.assertEquals(displayedAlertText, alertText);
         driver.switchTo().alert().accept();
     }
 
@@ -41,4 +41,5 @@ public class HelperBase {
             return false;
         }
     }
+
 }

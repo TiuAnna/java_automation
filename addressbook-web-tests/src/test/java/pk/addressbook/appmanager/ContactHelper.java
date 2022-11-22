@@ -1,18 +1,18 @@
 package pk.addressbook.appmanager;
 
-import org.junit.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import pk.addressbook.model.ContactData;
 import pk.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+
 
 public class ContactHelper extends HelperBase {
 
@@ -38,6 +38,12 @@ public class ContactHelper extends HelperBase {
         }
 
     }
+    public void modifyContact(int index, ContactData contact) {
+        goToEditPage(index);
+        fillTheContactForm(contact, false);
+        submitContactModification();
+        returnToContactPage();
+    }
 
     public void selectContact(int index) {
         driver.findElements(By.name("selected[]")).get(index).click();
@@ -50,7 +56,9 @@ public class ContactHelper extends HelperBase {
     public void acceptAlertForDeletion() {
         acceptAlert("Delete 1 addresses?");
     }
-
+    public void goToEditPage(int index) {
+        driver.findElements(By.xpath("//img[@title='Edit']")).get(index).click();
+    }
     public void submitContactModification() {
         click(By.name("update"));
     }
@@ -72,10 +80,10 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
     public String getGroupName() {
-       if (isElementPresent(By.xpath("//option[text()='new group']"))) {
-           return "new group";
+       if (isElementPresent(By.xpath("//option[text()='modified group']"))) {
+           return "modified group";
        } else {
-           return null;
+           return "[none]";
        }
     }
 
