@@ -4,25 +4,21 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pk.addressbook.model.ContactData;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Set;
 
 public class CreateNewContactTest extends TestBase {
     @Test
     public void createNewContact() {
         app.goTo().homePage();
-        ArrayList<ContactData> before = app.contact().getContactList();
+        Set<ContactData> before = app.contact().all();
         ContactData contact = new ContactData().withName("Nick").withLastName("Yellow").withAddress("LA")
                 .withMail("thesecond@mail.com").withGroup(app.contact().getGroupName());
         app.contact().createContact(contact, true);
-        ArrayList<ContactData> after = app.contact().getContactList();
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() + 1);
 
-        contact.withId(after.stream().max((Comparator.comparingInt(ContactData::id))).get().id());
+        contact.withId(after.stream().mapToInt((c) -> c.id()).max().getAsInt());
         before.add(contact);
-        Comparator<ContactData> byId = Comparator.comparingInt(ContactData::id);
-        before.sort(byId);
-        after.sort(byId);
         Assert.assertEquals(before, after);
 
     }

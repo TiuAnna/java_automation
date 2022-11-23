@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 import pk.addressbook.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends HelperBase{
     public GroupHelper(WebDriver driver) {
@@ -23,8 +25,8 @@ public class GroupHelper extends HelperBase{
         type(By.name("group_footer"), groupData.footer());
     }
 
-    public void modify(int index, GroupData group) {
-        selectGroup(index);
+    public void modify(GroupData group) {
+        selectGroupById(group.id());
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
@@ -41,6 +43,9 @@ public class GroupHelper extends HelperBase{
 
     public void selectGroup(int index) {
         driver.findElements(By.name("selected[]")).get(index).click();
+    }
+    public void selectGroupById(int groupId) {
+        driver.findElement(By.cssSelector("input[value='" + groupId + "']")).click();
     }
 
     public void initGroupModification() {
@@ -64,6 +69,11 @@ public class GroupHelper extends HelperBase{
         deleteSelectedGroups();
         returnToGroupPage();
     }
+    public void delete(GroupData groupToDelete) {
+        selectGroupById(groupToDelete.id());
+        deleteSelectedGroups();
+        returnToGroupPage();
+    }
 
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
@@ -83,4 +93,17 @@ public class GroupHelper extends HelperBase{
         }
         return groups;
     }
+
+    public Set<GroupData> all() {
+        Set<GroupData> groups = new HashSet<>();
+        List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
+        for (WebElement element : elements) {
+            String name = element.getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            groups.add(new GroupData().withId(id).withName(name));
+        }
+        return groups;
+    }
+
+
 }

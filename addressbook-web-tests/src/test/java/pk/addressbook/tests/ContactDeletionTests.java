@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import pk.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class ContactDeletionTests extends TestBase {
     @BeforeMethod
@@ -20,13 +21,13 @@ public class ContactDeletionTests extends TestBase {
 
     @Test
     public void testContactDeletion() {
-        ArrayList<ContactData> before = app.contact().getContactList();
-        int index = before.size() - 1;
-        app.contact().delete(index);
-        ArrayList<ContactData> after = app.contact().getContactList();
+        Set<ContactData> before = app.contact().all();
+        ContactData contactToDelete = before.iterator().next();
+        app.contact().delete(contactToDelete);
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() - 1);
 
-        before.remove(index);
+        before.remove(contactToDelete);
         Assert.assertEquals(before, after);
     }
 

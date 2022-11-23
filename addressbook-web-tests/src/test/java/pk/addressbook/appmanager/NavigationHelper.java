@@ -34,6 +34,9 @@ public class NavigationHelper extends HelperBase {
     public void editPage(int index) {
         driver.findElements(By.xpath("//img[@title='Edit']")).get(index).click();
     }
+    public void editPageById(int contactId) {
+        driver.findElement(By.cssSelector("a[href='edit.php?id=" + contactId +"']")).click();
+    }
 
 
 }

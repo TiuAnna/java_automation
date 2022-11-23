@@ -7,6 +7,7 @@ import pk.addressbook.model.GroupData;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupModificationTests extends TestBase {
     @BeforeMethod
@@ -18,17 +19,17 @@ public class GroupModificationTests extends TestBase {
     }
     @Test
     public void testGroupModification() {
-        List<GroupData> before = app.group().list();
-        int index = before.size() - 1;
+        Set<GroupData> before = app.group().all();
+        GroupData groupToModify = before.iterator().next();
         GroupData group = new GroupData()
-                .withId(before.get(index).id()).withName("modified group").withHeader("new header").withFooter("modified footer");
-        app.group().modify(index, group);
-        List<GroupData> after = app.group().list();
+                .withId(groupToModify.id()).withName("modified group").withHeader("new header").withFooter("modified footer");
+        app.group().modify(group);
+        Set<GroupData> after = app.group().all();
         Assert.assertEquals(after.size(), before.size());
 
-        before.remove(index);
+        before.remove(groupToModify);
         before.add(group);
-        Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
+        Assert.assertEquals(before, after);
     }
 
 
