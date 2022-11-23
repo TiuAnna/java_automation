@@ -27,7 +27,11 @@ public class NavigationHelper extends HelperBase {
         click(By.linkText("home"));
     }
 
-    public void goToEditPage(int index) {
+    public void newContactCreationPage() {
+        click(By.linkText("add new"));
+    }
+
+    public void editPage(int index) {
         driver.findElements(By.xpath("//img[@title='Edit']")).get(index).click();
     }
 

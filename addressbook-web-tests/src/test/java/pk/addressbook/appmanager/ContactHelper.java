@@ -7,14 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pk.addressbook.model.ContactData;
-import pk.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class ContactHelper extends HelperBase {
+
+    NavigationHelper goTo = new NavigationHelper(driver);
 
     public ContactHelper(WebDriver driver) {
 
@@ -38,8 +38,9 @@ public class ContactHelper extends HelperBase {
         }
 
     }
-    public void modifyContact(int index, ContactData contact) {
-        goToEditPage(index);
+
+    public void modify(int index, ContactData contact) {
+        goTo.editPage(index);
         fillTheContactForm(contact, false);
         submitContactModification();
         returnToContactPage();
@@ -54,37 +55,41 @@ public class ContactHelper extends HelperBase {
     }
 
     public void acceptAlertForDeletion() {
-        acceptAlert("Delete 1 addresses?");
+        driver.switchTo().alert().accept();
     }
-    public void goToEditPage(int index) {
-        driver.findElements(By.xpath("//img[@title='Edit']")).get(index).click();
-    }
+
     public void submitContactModification() {
         click(By.name("update"));
     }
-    public void goToNewContactCreationPage() {
-        click(By.linkText("add new"));
-    }
+
     public void returnToContactPage() {
         click(By.linkText("home page"));
     }
 
     public void createContact(ContactData contactData, boolean groupField) {
-        goToNewContactCreationPage();
+        goTo.newContactCreationPage();
         fillTheContactForm(contactData, groupField);
         submitNewContactCreation();
         returnToContactPage();
     }
 
+    public void delete(int index) {
+        selectContact(index);
+        deleteSelectedContacts();
+        acceptAlertForDeletion();
+        goTo.homePage();
+    }
+
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
+
     public String getGroupName() {
-       if (isElementPresent(By.xpath("//option[text()='modified group']"))) {
-           return "modified group";
-       } else {
-           return "[none]";
-       }
+        if (isElementPresent(By.xpath("//option[text()='modified group']"))) {
+            return "modified group";
+        } else {
+            return "[none]";
+        }
     }
 
     public ArrayList<ContactData> getContactList() {
@@ -95,8 +100,7 @@ public class ContactHelper extends HelperBase {
             String lastName = fields.get(1).getText();
             String name = fields.get(2).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData contact = new ContactData(id, name, lastName, null, null, null, null);
-            contacts.add(contact);
+            contacts.add(new ContactData().withId(id).withName(name).withLastName(lastName));
         }
         return contacts;
     }

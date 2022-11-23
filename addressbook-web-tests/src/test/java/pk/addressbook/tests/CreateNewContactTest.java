@@ -7,24 +7,24 @@ import pk.addressbook.model.ContactData;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class CreateNewContactTest extends TestBase{
-  @Test
-  public void createNewContact() {
-    app.goTo().homePage();
-    ArrayList<ContactData> before = app.contact().getContactList();
-    ContactData contact = new ContactData("Nick", "Yellow",
-            "LA", null, "thesecond@mail.com", app.contact().getGroupName());
-    app.contact().createContact(contact, true);
-    ArrayList<ContactData> after = app.contact().getContactList();
-    Assert.assertEquals(after.size(), before.size() + 1);
+public class CreateNewContactTest extends TestBase {
+    @Test
+    public void createNewContact() {
+        app.goTo().homePage();
+        ArrayList<ContactData> before = app.contact().getContactList();
+        ContactData contact = new ContactData().withName("Nick").withLastName("Yellow").withAddress("LA")
+                .withMail("thesecond@mail.com").withGroup(app.contact().getGroupName());
+        app.contact().createContact(contact, true);
+        ArrayList<ContactData> after = app.contact().getContactList();
+        Assert.assertEquals(after.size(), before.size() + 1);
 
-    contact.setId(after.stream().max((Comparator.comparingInt(ContactData::id))).get().id());
-    before.add(contact);
-    Comparator<ContactData> byId = Comparator.comparingInt(ContactData::id);
-    before.sort(byId);
-    after.sort(byId);
-    Assert.assertEquals(before, after);
-    
-  }
+        contact.withId(after.stream().max((Comparator.comparingInt(ContactData::id))).get().id());
+        before.add(contact);
+        Comparator<ContactData> byId = Comparator.comparingInt(ContactData::id);
+        before.sort(byId);
+        after.sort(byId);
+        Assert.assertEquals(before, after);
+
+    }
 
 }

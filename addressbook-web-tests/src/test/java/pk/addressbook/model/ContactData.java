@@ -3,34 +3,13 @@ package pk.addressbook.model;
 import java.util.Objects;
 
 public final class ContactData {
-    private int id;
-    private final String name;
-    private final String lastName;
-    private final String address;
-    private final String telNumber;
-    private final String mail;
-    private final String group;
-
-    public ContactData(String name, String lastName, String address, String telNumber, String mail, String group) {
-        this.id = 0;
-        this.name = name;
-        this.lastName = lastName;
-        this.address = address;
-        this.telNumber = telNumber;
-        this.mail = mail;
-        this.group = group;
-    }
-
-    public ContactData(int id, String name, String lastName, String address, String telNumber, String mail, String group) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.address = address;
-        this.telNumber = telNumber;
-        this.mail = mail;
-        this.group = group;
-    }
-
+    private int id = Integer.MAX_VALUE;
+    private String name;
+    private String lastName;
+    private String address;
+    private String telNumber;
+    private String mail;
+    private String group;
 
     @Override
     public boolean equals(Object o) {
@@ -54,12 +33,45 @@ public final class ContactData {
                 '}';
     }
 
-    public void setId(int id) {
+    public ContactData withId(int id) {
         this.id = id;
+        return this;
     }
+
+    public ContactData withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public ContactData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public ContactData withTelNumber(String telNumber) {
+        this.telNumber = telNumber;
+        return this;
+    }
+
+    public ContactData withMail(String mail) {
+        this.mail = mail;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
     public int id() {
         return id;
     }
+
     public String name() {
         return name;
     }
