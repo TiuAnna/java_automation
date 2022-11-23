@@ -10,13 +10,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GroupHelper extends HelperBase{
+public class GroupHelper extends HelperBase {
     public GroupHelper(WebDriver driver) {
         super(driver);
     }
 
     public void submitGroupCreation() {
-      click(By.name("submit"));
+        click(By.name("submit"));
     }
 
     public void fillGroupForm(GroupData groupData) {
@@ -41,9 +41,6 @@ public class GroupHelper extends HelperBase{
         click(By.name("delete"));
     }
 
-    public void selectGroup(int index) {
-        driver.findElements(By.name("selected[]")).get(index).click();
-    }
     public void selectGroupById(int groupId) {
         driver.findElement(By.cssSelector("input[value='" + groupId + "']")).click();
     }
@@ -55,20 +52,18 @@ public class GroupHelper extends HelperBase{
     public void submitGroupModification() {
         click(By.name("update"));
     }
+
     public void returnToGroupPage() {
         click(By.linkText("group page"));
     }
+
     public void create(GroupData groupData) {
         initGroupCreation();
         fillGroupForm(groupData);
         submitGroupCreation();
         returnToGroupPage();
     }
-    public void delete(int index) {
-        selectGroup(index);
-        deleteSelectedGroups();
-        returnToGroupPage();
-    }
+
     public void delete(GroupData groupToDelete) {
         selectGroupById(groupToDelete.id());
         deleteSelectedGroups();
@@ -80,18 +75,7 @@ public class GroupHelper extends HelperBase{
     }
 
     public int getGroupCount() {
-       return driver.findElements(By.name("selected[]")).size();
-    }
-
-    public List<GroupData> list() {
-        List<GroupData> groups = new ArrayList<>();
-        List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
-        for (WebElement element : elements) {
-            String name = element.getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            groups.add(new GroupData().withId(id).withName(name));
-        }
-        return groups;
+        return driver.findElements(By.name("selected[]")).size();
     }
 
     public Set<GroupData> all() {

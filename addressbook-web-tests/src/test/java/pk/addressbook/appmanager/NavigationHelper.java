@@ -18,8 +18,6 @@ public class NavigationHelper extends HelperBase {
       click(By.linkText("groups"));
     }
 
-
-
     public void homePage() {
         if (isElementPresent(By.id("maintable"))) {
             return;
@@ -31,9 +29,6 @@ public class NavigationHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    public void editPage(int index) {
-        driver.findElements(By.xpath("//img[@title='Edit']")).get(index).click();
-    }
     public void editPageById(int contactId) {
         driver.findElement(By.cssSelector("a[href='edit.php?id=" + contactId +"']")).click();
     }

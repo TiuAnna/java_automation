@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pk.addressbook.model.ContactData;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -48,9 +47,6 @@ public class ContactHelper extends HelperBase {
         returnToContactPage();
     }
 
-    public void selectContact(int index) {
-        driver.findElements(By.name("selected[]")).get(index).click();
-    }
     public void selectContactById(int contactId) {
         driver.findElement(By.cssSelector("input[value='" + contactId + "'")).click();
     }
@@ -78,12 +74,6 @@ public class ContactHelper extends HelperBase {
         returnToContactPage();
     }
 
-    public void delete(int index) {
-        selectContact(index);
-        deleteSelectedContacts();
-        acceptAlertForDeletion();
-        goTo.homePage();
-    }
     public void delete(ContactData contactToDelete) {
         selectContactById(contactToDelete.id());
         deleteSelectedContacts();
@@ -103,18 +93,6 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public ArrayList<ContactData> getContactList() {
-        ArrayList<ContactData> contacts = new ArrayList<>();
-        List<WebElement> elements = driver.findElements(By.name("entry"));
-        for (WebElement element : elements) {
-            List<WebElement> fields = element.findElements(By.tagName("td"));
-            String lastName = fields.get(1).getText();
-            String name = fields.get(2).getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            contacts.add(new ContactData().withId(id).withName(name).withLastName(lastName));
-        }
-        return contacts;
-    }
     public Set<ContactData> all() {
         Set<ContactData> contacts = new HashSet<>();
         List<WebElement> elements = driver.findElements(By.name("entry"));
