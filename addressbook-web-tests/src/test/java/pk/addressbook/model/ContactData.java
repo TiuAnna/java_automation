@@ -11,10 +11,14 @@ public final class ContactData {
     private String mobilePhone;
     private String workPhone;
     private String mail;
+    private String mail2;
+    private String mail3;
+
     private String group;
 
 
     private String allPhones;
+    private String allMails;
 
     @Override
     public boolean equals(Object o) {
@@ -78,8 +82,20 @@ public final class ContactData {
         return this;
     }
 
-    public ContactData withMail(String mail) {
+    public ContactData withEmail(String mail) {
         this.mail = mail;
+        return this;
+    }
+    public ContactData withSecondEmail(String mail2) {
+        this.mail2 = mail2;
+        return this;
+    }
+    public ContactData withThirdEmail(String mail3) {
+        this.mail3 = mail3;
+        return this;
+    }
+    public ContactData withAllEmails(String allMails) {
+        this.allMails = allMails;
         return this;
     }
 
@@ -118,11 +134,23 @@ public final class ContactData {
         return mail;
     }
 
+    public String mail2() {
+        return mail2;
+    }
+
+    public String mail3() {
+        return mail3;
+    }
+
     public String group() {
         return group;
     }
     public String allPhones() {
         return allPhones;
+    }
+
+    public String allMails() {
+        return allMails;
     }
 
 
