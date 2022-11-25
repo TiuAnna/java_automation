@@ -9,10 +9,8 @@ import org.testng.Assert;
 import pk.addressbook.model.ContactData;
 import pk.addressbook.model.Contacts;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -31,7 +29,9 @@ public class ContactHelper extends HelperBase {
         type(By.name("firstname"), contactData.name());
         type(By.name("lastname"), contactData.lastName());
         type(By.name("address"), contactData.address());
-        type(By.name("home"), contactData.telNumber());
+        type(By.name("home"), contactData.homePhone());
+        type(By.name("mobile"),contactData.mobilePhone());
+        type(By.name("work"),contactData.workPhone());
         type(By.name("email"), contactData.mail());
         if (creation) {
             new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactData.group());
@@ -45,6 +45,7 @@ public class ContactHelper extends HelperBase {
         goTo.editPageById(contact.id());
         fillTheContactForm(contact, false);
         submitContactModification();
+        contactCache = null;
         returnToContactPage();
     }
 
@@ -72,6 +73,7 @@ public class ContactHelper extends HelperBase {
         goTo.newContactCreationPage();
         fillTheContactForm(contactData, groupField);
         submitNewContactCreation();
+        contactCache = null;
         returnToContactPage();
     }
 
@@ -79,6 +81,7 @@ public class ContactHelper extends HelperBase {
         selectContactById(contactToDelete.id());
         deleteSelectedContacts();
         acceptAlertForDeletion();
+        contactCache = null;
         goTo.homePage();
     }
 
@@ -94,16 +97,35 @@ public class ContactHelper extends HelperBase {
         }
     }
 
+    private Contacts contactCache = null;
+
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = driver.findElements(By.name("entry"));
         for (WebElement element : elements) {
             List<WebElement> fields = element.findElements(By.tagName("td"));
             String lastName = fields.get(1).getText();
             String name = fields.get(2).getText();
+            String allPhones = fields.get(5).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            contacts.add(new ContactData().withId(id).withName(name).withLastName(lastName));
+            contactCache.add(new ContactData().withId(id).withName(name).withLastName(lastName)
+                    .withAllPhones(allPhones));
         }
-        return contacts;
+        return new Contacts(contactCache);
+    }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        goTo.editPageById(contact.id());
+        String firstname = driver.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = driver.findElement(By.name("lastname")).getAttribute("value");
+        String home = driver.findElement(By.name("home")).getAttribute("value");
+        String mobile = driver.findElement(By.name("mobile")).getAttribute("value");
+        String work = driver.findElement(By.name("work")).getAttribute("value");
+        driver.navigate().back();
+        return new ContactData().withId(contact.id()).withName(firstname).withLastName(lastname)
+                .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
     }
 }

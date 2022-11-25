@@ -7,9 +7,14 @@ public final class ContactData {
     private String name;
     private String lastName;
     private String address;
-    private String telNumber;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
     private String mail;
     private String group;
+
+
+    private String allPhones;
 
     @Override
     public boolean equals(Object o) {
@@ -53,8 +58,23 @@ public final class ContactData {
         return this;
     }
 
-    public ContactData withTelNumber(String telNumber) {
-        this.telNumber = telNumber;
+    public ContactData withHomePhone(String number) {
+        this.homePhone = number;
+        return this;
+    }
+
+    public ContactData withMobilePhone(String number) {
+        this.mobilePhone = number;
+        return this;
+    }
+
+    public ContactData withWorkPhone(String number) {
+        this.workPhone = number;
+        return this;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
         return this;
     }
 
@@ -84,8 +104,14 @@ public final class ContactData {
         return address;
     }
 
-    public String telNumber() {
-        return telNumber;
+    public String homePhone() {
+        return homePhone;
+    }
+    public String mobilePhone() {
+        return mobilePhone;
+    }
+    public String workPhone() {
+        return workPhone;
     }
 
     public String mail() {
@@ -94,6 +120,9 @@ public final class ContactData {
 
     public String group() {
         return group;
+    }
+    public String allPhones() {
+        return allPhones;
     }
 
 
