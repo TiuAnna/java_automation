@@ -1,5 +1,6 @@
 package pk.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public final class ContactData {
@@ -13,6 +14,9 @@ public final class ContactData {
     private String mail;
     private String mail2;
     private String mail3;
+
+
+    private File photo;
 
     private String group;
 
@@ -104,6 +108,11 @@ public final class ContactData {
         return this;
     }
 
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
     public int id() {
         return id;
     }
@@ -151,6 +160,9 @@ public final class ContactData {
 
     public String allMails() {
         return allMails;
+    }
+    public File photo() {
+        return photo;
     }
 
 

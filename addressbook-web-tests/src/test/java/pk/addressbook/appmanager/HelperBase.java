@@ -5,6 +5,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.io.File;
+
 
 public class HelperBase {
     protected WebDriver driver;
@@ -21,12 +23,20 @@ public class HelperBase {
         click(locator);
         if (text != null) {
             String existingText = driver.findElement(locator).getAttribute("value");
-            if (! text.equals(existingText)) {
-            driver.findElement(locator).clear();
-            driver.findElement(locator).sendKeys(text);
+            if (!text.equals(existingText)) {
+                driver.findElement(locator).clear();
+                driver.findElement(locator).sendKeys(text);
             }
         }
     }
+
+    protected void attach(By locator, File file) {
+        if (file != null) {
+            driver.findElement(locator).sendKeys(file.getAbsolutePath());
+
+        }
+    }
+
     public void acceptAlert(String alertText) {
         String displayedAlertText = driver.switchTo().alert().getText();
         Assert.assertEquals(displayedAlertText, alertText);
