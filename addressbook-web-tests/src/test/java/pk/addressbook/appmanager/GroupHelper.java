@@ -4,23 +4,32 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pk.addressbook.model.GroupData;
+import pk.addressbook.model.Groups;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class GroupHelper extends HelperBase{
+public class GroupHelper extends HelperBase {
     public GroupHelper(WebDriver driver) {
         super(driver);
     }
 
     public void submitGroupCreation() {
-      click(By.name("submit"));
+        click(By.name("submit"));
     }
 
     public void fillGroupForm(GroupData groupData) {
         type(By.name("group_name"), groupData.name());
         type(By.name("group_header"), groupData.header());
         type(By.name("group_footer"), groupData.footer());
+    }
+
+    public void modify(GroupData group) {
+        selectGroupById(group.id());
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        groupCache = null;
+        returnToGroupPage();
     }
 
     public void initGroupCreation() {
@@ -31,8 +40,8 @@ public class GroupHelper extends HelperBase{
         click(By.name("delete"));
     }
 
-    public void selectGroup(int index) {
-        driver.findElements(By.name("selected[]")).get(index).click();
+    public void selectGroupById(int groupId) {
+        driver.findElement(By.cssSelector("input[value='" + groupId + "']")).click();
     }
 
     public void initGroupModification() {
@@ -42,13 +51,23 @@ public class GroupHelper extends HelperBase{
     public void submitGroupModification() {
         click(By.name("update"));
     }
+
     public void returnToGroupPage() {
         click(By.linkText("group page"));
     }
-    public void createGroup(GroupData groupData) {
+
+    public void create(GroupData groupData) {
         initGroupCreation();
         fillGroupForm(groupData);
         submitGroupCreation();
+        groupCache = null;
+        returnToGroupPage();
+    }
+
+    public void delete(GroupData groupToDelete) {
+        selectGroupById(groupToDelete.id());
+        deleteSelectedGroups();
+        groupCache = null;
         returnToGroupPage();
     }
 
@@ -56,19 +75,25 @@ public class GroupHelper extends HelperBase{
         return isElementPresent(By.name("selected[]"));
     }
 
-    public int getGroupCount() {
-       return driver.findElements(By.name("selected[]")).size();
+    public int count() {
+        return driver.findElements(By.name("selected[]")).size();
     }
 
-    public List<GroupData> getGroupList() {
-        List<GroupData> groups = new ArrayList<>();
+    private Groups groupCache = null;
+
+    public Groups all() {
+        if (groupCache != null) {
+            return new Groups(groupCache);
+        }
+        groupCache = new Groups();
         List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            GroupData group = new GroupData(id, name, null, null);
-            groups.add(group);
+            groupCache.add(new GroupData().withId(id).withName(name));
         }
-        return groups;
+        return new Groups(groupCache);
     }
+
+
 }

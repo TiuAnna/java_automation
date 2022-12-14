@@ -1,23 +1,25 @@
 package pk.addressbook.tests;
 
-import org.junit.After;
-import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.Browser;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import pk.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-    protected final ApplicationManager app = new ApplicationManager(Browser.EDGE);
+    protected static final ApplicationManager app = new ApplicationManager(Browser.EDGE);
 
 
 
-    @Before
+    @BeforeSuite
     public void setUp() {
         app.init();
     }
 
-    @After
+    @AfterSuite
     public void tearDown() {
         app.stop();
     }

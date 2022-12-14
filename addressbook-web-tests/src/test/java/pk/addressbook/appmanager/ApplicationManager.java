@@ -15,7 +15,7 @@ public class ApplicationManager {
 
     private ContactHelper contactHelper;
     private SessionHelper sessionHelper;
-    private NavigationHelper navigationHelper;
+    public NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
     JavascriptExecutor js;
     private Browser browser;
@@ -51,15 +51,15 @@ public class ApplicationManager {
 
 
 
-    public ContactHelper getContactHelper() {
+    public ContactHelper contact() {
         return contactHelper;
     }
 
-    public GroupHelper getGroupHelper() {
+    public GroupHelper group() {
         return groupHelper;
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
         return navigationHelper;
     }
 }

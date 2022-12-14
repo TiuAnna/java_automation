@@ -1,20 +1,20 @@
 package pk.addressbook.appmanager;
 
-import org.junit.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import pk.addressbook.model.ContactData;
-import pk.addressbook.model.GroupData;
+import pk.addressbook.model.Contacts;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 public class ContactHelper extends HelperBase {
+
+    NavigationHelper goTo = new NavigationHelper(driver);
 
     public ContactHelper(WebDriver driver) {
 
@@ -29,8 +29,12 @@ public class ContactHelper extends HelperBase {
         type(By.name("firstname"), contactData.name());
         type(By.name("lastname"), contactData.lastName());
         type(By.name("address"), contactData.address());
-        type(By.name("home"), contactData.telNumber());
+        type(By.name("home"), contactData.homePhone());
+        type(By.name("mobile"),contactData.mobilePhone());
+        type(By.name("work"),contactData.workPhone());
         type(By.name("email"), contactData.mail());
+        type(By.name("email2"), contactData.mail2());
+        type(By.name("email3"), contactData.mail3());
         if (creation) {
             new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactData.group());
         } else {
@@ -39,8 +43,16 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void selectContact(int index) {
-        driver.findElements(By.name("selected[]")).get(index).click();
+    public void modify(ContactData contact) {
+        goTo.editPageById(contact.id());
+        fillTheContactForm(contact, false);
+        submitContactModification();
+        contactCache = null;
+        returnToContactPage();
+    }
+
+    public void selectContactById(int contactId) {
+        driver.findElement(By.cssSelector("input[value='" + contactId + "'")).click();
     }
 
     public void deleteSelectedContacts() {
@@ -48,48 +60,81 @@ public class ContactHelper extends HelperBase {
     }
 
     public void acceptAlertForDeletion() {
-        acceptAlert("Delete 1 addresses?");
+        driver.switchTo().alert().accept();
     }
 
     public void submitContactModification() {
         click(By.name("update"));
     }
-    public void goToNewContactCreationPage() {
-        click(By.linkText("add new"));
-    }
+
     public void returnToContactPage() {
         click(By.linkText("home page"));
     }
 
     public void createContact(ContactData contactData, boolean groupField) {
-        goToNewContactCreationPage();
+        goTo.newContactCreationPage();
         fillTheContactForm(contactData, groupField);
         submitNewContactCreation();
+        contactCache = null;
         returnToContactPage();
+    }
+
+    public void delete(ContactData contactToDelete) {
+        selectContactById(contactToDelete.id());
+        deleteSelectedContacts();
+        acceptAlertForDeletion();
+        contactCache = null;
+        goTo.homePage();
     }
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
+
     public String getGroupName() {
-       if (isElementPresent(By.xpath("//option[text()='new group']"))) {
-           return "new group";
-       } else {
-           return null;
-       }
+        if (isElementPresent(By.xpath("//option[text()='modified group']"))) {
+            return "modified group";
+        } else {
+            return "[none]";
+        }
     }
 
-    public ArrayList<ContactData> getContactList() {
-        ArrayList<ContactData> contacts = new ArrayList<>();
+    private Contacts contactCache = null;
+
+    public Contacts all() {
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = driver.findElements(By.name("entry"));
         for (WebElement element : elements) {
             List<WebElement> fields = element.findElements(By.tagName("td"));
             String lastName = fields.get(1).getText();
             String name = fields.get(2).getText();
+            String address = fields.get(3).getText();
+            String allPhones = fields.get(5).getText();
+            String allEmails = fields.get(4).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData contact = new ContactData(id, name, lastName, null, null, null, null);
-            contacts.add(contact);
+            contactCache.add(new ContactData().withId(id).withName(name).withLastName(lastName).withAddress(address)
+                    .withAllPhones(allPhones).withAllEmails(allEmails));
         }
-        return contacts;
+        return new Contacts(contactCache);
+    }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        goTo.editPageById(contact.id());
+        String firstname = driver.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = driver.findElement(By.name("lastname")).getAttribute("value");
+        String address = driver.findElement(By.name("address")).getAttribute("value");
+        String home = driver.findElement(By.name("home")).getAttribute("value");
+        String mobile = driver.findElement(By.name("mobile")).getAttribute("value");
+        String work = driver.findElement(By.name("work")).getAttribute("value");
+        String email = driver.findElement(By.name("email")).getAttribute("value");
+        String secondEmail = driver.findElement(By.name("email2")).getAttribute("value");
+        String thirdEmail = driver.findElement(By.name("email3")).getAttribute("value");
+        driver.navigate().back();
+        return new ContactData().withId(contact.id()).withName(firstname).withLastName(lastname).withAddress(address)
+                .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
+                .withEmail(email).withSecondEmail(secondEmail).withThirdEmail(thirdEmail);
     }
 }

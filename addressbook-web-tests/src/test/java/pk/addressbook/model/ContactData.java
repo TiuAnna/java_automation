@@ -3,34 +3,22 @@ package pk.addressbook.model;
 import java.util.Objects;
 
 public final class ContactData {
-    private int id;
-    private final String name;
-    private final String lastName;
-    private final String address;
-    private final String telNumber;
-    private final String mail;
-    private final String group;
+    private int id = Integer.MAX_VALUE;
+    private String name;
+    private String lastName;
+    private String address;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
+    private String mail;
+    private String mail2;
+    private String mail3;
 
-    public ContactData(String name, String lastName, String address, String telNumber, String mail, String group) {
-        this.id = 0;
-        this.name = name;
-        this.lastName = lastName;
-        this.address = address;
-        this.telNumber = telNumber;
-        this.mail = mail;
-        this.group = group;
-    }
+    private String group;
 
-    public ContactData(int id, String name, String lastName, String address, String telNumber, String mail, String group) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.address = address;
-        this.telNumber = telNumber;
-        this.mail = mail;
-        this.group = group;
-    }
 
+    private String allPhones;
+    private String allMails;
 
     @Override
     public boolean equals(Object o) {
@@ -54,12 +42,72 @@ public final class ContactData {
                 '}';
     }
 
-    public void setId(int id) {
+    public ContactData withId(int id) {
         this.id = id;
+        return this;
     }
+
+    public ContactData withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public ContactData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public ContactData withHomePhone(String number) {
+        this.homePhone = number;
+        return this;
+    }
+
+    public ContactData withMobilePhone(String number) {
+        this.mobilePhone = number;
+        return this;
+    }
+
+    public ContactData withWorkPhone(String number) {
+        this.workPhone = number;
+        return this;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public ContactData withEmail(String mail) {
+        this.mail = mail;
+        return this;
+    }
+    public ContactData withSecondEmail(String mail2) {
+        this.mail2 = mail2;
+        return this;
+    }
+    public ContactData withThirdEmail(String mail3) {
+        this.mail3 = mail3;
+        return this;
+    }
+    public ContactData withAllEmails(String allMails) {
+        this.allMails = allMails;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
     public int id() {
         return id;
     }
+
     public String name() {
         return name;
     }
@@ -72,16 +120,37 @@ public final class ContactData {
         return address;
     }
 
-    public String telNumber() {
-        return telNumber;
+    public String homePhone() {
+        return homePhone;
+    }
+    public String mobilePhone() {
+        return mobilePhone;
+    }
+    public String workPhone() {
+        return workPhone;
     }
 
     public String mail() {
         return mail;
     }
 
+    public String mail2() {
+        return mail2;
+    }
+
+    public String mail3() {
+        return mail3;
+    }
+
     public String group() {
         return group;
+    }
+    public String allPhones() {
+        return allPhones;
+    }
+
+    public String allMails() {
+        return allMails;
     }
 
 

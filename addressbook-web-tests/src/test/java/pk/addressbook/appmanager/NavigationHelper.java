@@ -9,7 +9,7 @@ public class NavigationHelper extends HelperBase {
         super(driver);
     }
 
-    public void goToGroupPage() {
+    public void groupPage() {
         if (isElementPresent(By.tagName("h1"))
                 && driver.findElement(By.tagName("h1")).getText().equals("Groups")
                 && isElementPresent(By.name("new"))) {
@@ -18,18 +18,19 @@ public class NavigationHelper extends HelperBase {
       click(By.linkText("groups"));
     }
 
-
-
-    public void goToHomePage() {
+    public void homePage() {
         if (isElementPresent(By.id("maintable"))) {
             return;
         }
         click(By.linkText("home"));
     }
 
-    public void goToEditPage(int index) {
-        driver.findElements(By.xpath("//img[@title='Edit']")).get(index).click();
-//        click(By.cssSelector(".center:nth-child(8) img"));
+    public void newContactCreationPage() {
+        click(By.linkText("add new"));
+    }
+
+    public void editPageById(int contactId) {
+        driver.findElement(By.cssSelector("a[href='edit.php?id=" + contactId +"']")).click();
     }
 
 
